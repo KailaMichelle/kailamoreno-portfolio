@@ -28,6 +28,18 @@
   color: var(--accent);
 }
 
+.resume-intro {
+  margin: 1.5rem 0;
+  max-width: 40rem;
+}
+
+.resume-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
 @media (max-width: 900px) {
   .resume-grid {
     grid-template-columns: 1fr;
