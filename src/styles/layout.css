@@ -1,0 +1,34 @@
+.site-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.site-main {
+  flex: 1;
+}
+
+.work-page,
+.about-page,
+.case-page,
+.simple-page {
+  width: min(100%, var(--max));
+  margin: 0 auto;
+  padding: 5.75rem 1.5rem 8rem;
+}
+
+@media (max-width: 640px) {
+  .home-hero,
+  .selected-work,
+  .earlier-projects,
+  .experience-strip,
+  .work-page,
+  .about-page,
+  .case-page,
+  .simple-page {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

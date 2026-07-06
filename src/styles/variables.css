@@ -1,0 +1,20 @@
+:root {
+  --bg: #ffffff;
+  --surface: #fafafa;
+  --surface-warm: #fbfaf8;
+  --surface-soft: #f6f6f4;
+  --ink: #171717;
+  --muted: #6f6f6f;
+  --muted-light: #a3a3a3;
+  --line: rgba(23, 23, 23, 0.08);
+  --line-strong: rgba(23, 23, 23, 0.14);
+  --accent: #c66a32;
+  --accent-soft: #f5ece6;
+  --font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --max: 1600px;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --fast: 180ms;
+  --med: 260ms;
+  color: var(--ink);
+  background: var(--bg);
+}

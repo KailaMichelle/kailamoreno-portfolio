@@ -1,0 +1,35 @@
+.about-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 32rem);
+  gap: clamp(3rem, 7vw, 5rem);
+  align-items: end;
+}
+
+.about-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: none;
+  opacity: 1;
+  mix-blend-mode: normal;
+}
+
+.about-copy {
+  margin-top: 4.75rem;
+  max-width: 44rem;
+  display: grid;
+  gap: 1.35rem;
+}
+
+.about-copy p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.06rem;
+  line-height: 1.75;
+}
+
+@media (max-width: 900px) {
+  .about-hero {
+    grid-template-columns: 1fr;
+  }
+}

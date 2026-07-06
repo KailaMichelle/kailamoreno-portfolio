@@ -1,0 +1,40 @@
+.text-link,
+.back-link,
+.case-link {
+  position: relative;
+  z-index: 30;
+  display: inline-flex;
+  width: fit-content;
+  transition: color var(--fast) ease, transform var(--fast) var(--ease);
+}
+
+.text-link::after,
+.case-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -.28rem;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 220ms var(--ease);
+}
+
+.back-link:hover,
+.case-link,
+.text-link {
+  color: var(--ink);
+}
+
+.text-link:hover::after,
+.case-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.text-link.muted {
+  color: #8a8178;
+  pointer-events: none;
+}

@@ -1,0 +1,41 @@
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 20;
+  will-change: transform, width, height, opacity;
+  transition:
+    width 250ms var(--ease),
+    height 250ms var(--ease),
+    background 180ms ease,
+    opacity 180ms ease;
+}
+
+.cursor-dot.cursor-link {
+  width: 34px;
+  height: 34px;
+  background: rgba(198, 106, 50, 0.28);
+}
+
+.cursor-dot.cursor-project {
+  width: 84px;
+  height: 84px;
+  background: rgba(198, 106, 50, 0.22);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .cursor-dot {
+    display: none;
+  }
+}
