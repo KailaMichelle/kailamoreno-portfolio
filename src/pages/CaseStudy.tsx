@@ -27,9 +27,9 @@ export default function CaseStudy() {
     return <Navigate to="/" replace />
   }
 
-  const caseStudyList = caseStudies.filter((item) => item.status !== 'In progress')
-  const currentIndex = caseStudyList.findIndex((item) => item.slug === slug)
-  const nextStudy = caseStudyList[(currentIndex + 1) % caseStudyList.length]
+  // const caseStudyList = caseStudies.filter((item) => item.status !== 'In progress')
+  // const currentIndex = caseStudyList.findIndex((item) => item.slug === slug)
+  // const nextStudy = caseStudyList[(currentIndex + 1) % caseStudyList.length]
 
   return (
     <main className={`case-page ${study.accent ?? ''}`}>
