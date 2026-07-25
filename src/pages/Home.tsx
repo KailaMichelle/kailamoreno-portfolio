@@ -67,7 +67,7 @@ export default function Home() {
 
         <div className="hero-meta" aria-label="Quick details">
           <span>Los Angeles, CA</span>
-          <span>Currently @ BloomNation</span>
+          <span>Currently @ Promenade</span>
           <span>Open to opportunities</span>
           <a href="#work" aria-label="Scroll to selected work">
             ↓
