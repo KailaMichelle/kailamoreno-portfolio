@@ -62,7 +62,7 @@ export default function Home() {
       <section className="home-hero">
         <div className="hero-title">
           <h1>Designing thoughtful digital products.</h1>
-          <p>UX Engineer &amp; Product Designer</p>
+          <p>Product Designer &amp; UX Engineer</p>
         </div>
 
         <div className="hero-meta" aria-label="Quick details">
