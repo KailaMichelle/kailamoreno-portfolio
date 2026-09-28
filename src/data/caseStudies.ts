@@ -154,7 +154,7 @@ export const caseStudies: CaseStudy[] = [
     thumbnailImage: templateHero,
     imageNote:
       'Recreated with fictional interior design content to protect confidential work while preserving the original product logic, layout structure, and implementation approach.',
-    role: 'Product Design · UX Engineering',
+    role: 'Product Design · Design Systems',
     scope: 'UX flow, template structure, visual design, responsive implementation',
     team: 'Design, product, implementation, engineering',
     outcome:
@@ -243,7 +243,7 @@ export const caseStudies: CaseStudy[] = [
     description:
       'Currently designing a private destination wedding site focused on travel guidance, schedule details, guest communication, and RSVP flows.',
     status: 'In progress',
-    featured: true,
+    featured: false,
     accent: 'wedding',
     role: 'Product Design · Front-End Build',
     scope: 'IA, visual direction, responsive design, RSVP planning',

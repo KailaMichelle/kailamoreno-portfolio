@@ -1,11 +1,41 @@
 import { Link } from 'react-router-dom'
 import { caseStudies } from '../data/caseStudies'
-import { archiveProjects, experienceTags } from '../data/projects'
 
-function ProductThumbnail({ image, title }: { image?: string; title: string }) {
+function ProductThumbnail({
+  image,
+  title,
+}: {
+  image?: string
+  title: string
+}) {
   if (!image) return null
 
-  return <img className="product-thumbnail" src={image} alt={title} loading="lazy" />
+  return (
+    <img
+      className="product-thumbnail"
+      src={image}
+      alt={title}
+      loading="lazy"
+    />
+  )
+}
+
+function ProductHeader({
+  role,
+  order,
+}: {
+  role: string
+  order: number
+}) {
+  return (
+    <div className="product-header">
+      <span className="product-order">
+        {String(order).padStart(2, '0')}
+      </span>
+
+      <span className="product-role">{role}</span>
+    </div>
+  )
 }
 
 function WorkSection({
@@ -14,38 +44,38 @@ function WorkSection({
   description,
   status,
   image,
-  isInProgress,
+  role,
+  order,
 }: {
   slug: string
   title: string
   description: string
   status: string
   image?: string
-  isInProgress?: boolean
+  role: string
+  order: number
 }) {
-  if (isInProgress) {
-    return (
-      <section className="feature-section feature-section-compact">
-        <div className="in-progress-card">
-          <p>{status}</p>
-          <h2>{title}</h2>
-          <span>{description}</span>
-          <small>In progress</small>
-        </div>
-      </section>
-    )
-  }
-
   return (
     <section className="feature-section">
-      <Link to={`/work/${slug}`} className="feature-media" aria-label={`View ${title}`}>
-        <ProductThumbnail image={image} title={title} />
-      </Link>
+      <div className="feature-media-wrap">
+        <ProductHeader role={role} order={order} />
+
+        <Link
+          to={`/work/${slug}`}
+          className="feature-media"
+          aria-label={`View ${title}`}
+        >
+          <ProductThumbnail image={image} title={title} />
+        </Link>
+      </div>
 
       <div className="feature-copy">
         <p>{status}</p>
+
         <h2>{title}</h2>
+
         <span>{description}</span>
+
         <Link to={`/work/${slug}`} className="text-link">
           View project
         </Link>
@@ -62,23 +92,28 @@ export default function Home() {
       <section className="home-hero">
         <div className="hero-title">
           <h1>Designing thoughtful digital products.</h1>
-          <p>Product Designer &amp; UX Engineer</p>
+          <p>Product Designer · UX Engineer</p>
         </div>
 
         <div className="hero-meta" aria-label="Quick details">
           <span>Los Angeles, CA</span>
           <span>Currently @ Promenade</span>
           <span>Open to opportunities</span>
+
           <a href="#work" aria-label="Scroll to selected work">
             ↓
           </a>
         </div>
       </section>
 
-      <section id="work" className="selected-work" aria-label="Selected work">
+      <section
+        id="work"
+        className="selected-work"
+        aria-label="Selected work"
+      >
         <p className="section-kicker">Selected Work</p>
 
-        {featuredStudies.map((study) => (
+        {featuredStudies.map((study, index) => (
           <WorkSection
             key={study.slug}
             slug={study.slug}
@@ -86,37 +121,59 @@ export default function Home() {
             description={study.description}
             status={study.status}
             image={study.thumbnailImage}
-            isInProgress={study.status === 'In progress'}
+            role={study.role}
+            order={index + 1}
           />
         ))}
       </section>
 
-      <section className="earlier-projects" aria-label="Earlier projects">
-        <div className="earlier-projects-heading">
-          <p className="section-kicker">Earlier Projects</p>
-          <h2>Additional product builds.</h2>
-          <p>Selected work from my software engineering program that helped build my foundation in full-stack development and product thinking.</p>
+      <section
+        className="capabilities"
+        aria-labelledby="capabilities-title"
+      >
+        <div className="capabilities-heading">
+          <p className="section-kicker">Capabilities</p>
+
+          <h2 id="capabilities-title">
+            Design thinking with technical depth.
+          </h2>
         </div>
 
-        <div className="earlier-projects-grid">
-          {archiveProjects.map((project) => (
-            <article className="earlier-project-card" key={project.title}>
-              <img src={project.image} alt={`${project.title} screenshot`} loading="lazy" />
-              <div>
-                <h3>{project.title}</h3>
-                <p>{project.type}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+        <div className="capabilities-list">
+          <div className="capability">
+            <span>01</span>
 
-      <section className="experience-strip" aria-label="Additional experience">
-        <p>Additional professional work available upon request.</p>
-        <div>
-          {experienceTags.map((tag) => (
-            <span key={tag}>{tag}</span>
-          ))}
+            <div>
+              <h3>Product Design</h3>
+              <p>
+                Research · User flows · Interaction design · Prototyping
+              </p>
+            </div>
+          </div>
+
+          <div className="capability">
+            <span>02</span>
+
+            <div>
+              <h3>Design Systems</h3>
+              <p>
+                Reusable patterns · Components · Responsive systems ·
+                Accessibility
+              </p>
+            </div>
+          </div>
+
+          <div className="capability">
+            <span>03</span>
+
+            <div>
+              <h3>UX Engineering</h3>
+              <p>
+                React · TypeScript · Front-end collaboration · AI-assisted
+                development
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </>
