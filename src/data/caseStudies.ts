@@ -5,12 +5,13 @@ import mapMobileTwo from '../assets/caseStudyMap/iphone-webmock2-map.png'
 import oldDesktopMap from '../assets/caseStudyMap/desktop-old-map.png'
 import oldMobileMap from '../assets/caseStudyMap/mobile-old-map.png'
 
-import templateHero from '../assets/caseStudyHomepageEditor/atelier-hero.png'
+import templateHero from '../assets/caseStudyHomepageEditor/luna-hero.png'
 import templateFlow from '../assets/caseStudyHomepageEditor/atelier-userflow.png'
 import templateWireframes from '../assets/caseStudyHomepageEditor/atelier-wireframes.png'
-import templateDesktop from '../assets/caseStudyHomepageEditor/atelier--desktop-hero.png'
-import templateMobile from '../assets/caseStudyHomepageEditor/atelier-mobile-header.png'
-import templateFull from '../assets/caseStudyHomepageEditor/atelier-contact-section.png'
+import templateDesktop from '../assets/caseStudyHomepageEditor/luna-desktop-hero.png'
+import templateMobile from '../assets/caseStudyHomepageEditor/luna-mobile-header.png'
+import templateServices from '../assets/caseStudyHomepageEditor/luna-services-section.png'
+import templateGallery from '../assets/caseStudyHomepageEditor/luna-gallery-section.png'
 
 export type CaseStudySection = {
   kicker?: string
@@ -18,10 +19,22 @@ export type CaseStudySection = {
   body: string[]
 }
 
+export type CaseStudyStoryBlock = {
+  title: string
+  body?: string[]
+  list?: string[]
+  items?: { title: string; body: string }[]
+}
+
 export type CaseStudyArtifact = {
   label: string
   title: string
   description: string
+}
+
+export type CaseStudyMeta = {
+  label: string
+  value: string
 }
 
 export type CaseStudy = {
@@ -43,6 +56,7 @@ export type CaseStudy = {
   team: string
   outcome: string
   liveUrl?: string
+  meta?: CaseStudyMeta[]
 
   existingEyebrow?: string
   existingTitle?: string
@@ -78,10 +92,13 @@ export type CaseStudy = {
   templateTitle?: string
   templateDescription?: string
   templateImage?: string
+  templateImageTwo?: string
   templateCaption?: string
 
   artifacts?: CaseStudyArtifact[]
   sections?: CaseStudySection[]
+  story?: CaseStudyStoryBlock[]
+  closingStory?: CaseStudyStoryBlock[]
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -141,96 +158,137 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'homepage-template-system',
-    eyebrow: 'Recreated case study',
+    eyebrow: 'Product Design · Design Systems',
     title: 'Homepage Template System',
     subtitle:
-      'A flexible homepage template system designed to help internal teams create more polished, brand-aligned storefront experiences.',
+      'A library of homepage templates and reusable sections that helps internal teams build polished, responsive websites for wedding florists.',
     description:
-      'An anonymized recreation of confidential product work focused on homepage templates, reusable sections, and responsive implementation.',
+      'A library of homepage templates and reusable sections that helps internal teams build polished, responsive websites for wedding florists.',
     status: 'Case study',
     featured: true,
     accent: 'template',
     heroImage: templateHero,
     thumbnailImage: templateHero,
-    imageNote:
-      'Recreated with fictional interior design content to protect confidential work while preserving the original product logic, layout structure, and implementation approach.',
     role: 'Product Design · Design Systems',
     scope: 'UX flow, template structure, visual design, responsive implementation',
     team: 'Design, product, implementation, engineering',
     outcome:
       'Expanded homepage flexibility with a modular structure that supported more varied storefront layouts within an existing system.',
-    sections: [
+    meta: [
+      { label: 'Role', value: 'Product Designer' },
+      { label: 'Focus', value: 'Design systems, templates' },
+      { label: 'Users', value: 'Internal web teams' },
+      { label: 'Platform', value: 'Desktop & mobile' },
+    ],
+    story: [
       {
-        kicker: 'Context',
-        title: 'Expanding an existing system.',
+        title: 'Overview',
         body: [
-          'I worked within an existing website management platform used by internal teams to build and configure storefront homepages.',
+          'Wedding florists sell through their imagery. Their homepage is their portfolio, first impression, and inquiry funnel. I designed a template system that lets our internal teams build these sites faster without losing what makes each florist distinct.',
         ],
       },
       {
-        kicker: 'Problem',
-        title: 'Limited homepage flexibility.',
+        title: 'The Challenge',
         body: [
-          'The existing template options made it difficult to create distinct, brand-aligned pages without one-off design or development support.',
+          'Building each site from scratch was slow and produced inconsistent results. The team needed a faster starting point that still felt custom to each florist.',
         ],
       },
       {
-        kicker: 'Approach',
-        title: 'Reusable, modular sections.',
-        body: [
-          'I focused on flexible homepage sections, configurable content areas, and responsive patterns that could scale across different visual directions.',
+        title: 'Goals',
+        list: [
+          'Speed up homepage builds',
+          'Keep quality consistent across sites',
+          'Let each florist’s style come through',
+          'Work seamlessly on mobile',
+        ],
+      },
+      {
+        title: 'Approach',
+        items: [
+          {
+            title: 'Designing for two audiences',
+            body: 'The system had to be easy for the team to build with and compelling for the couples browsing the site.',
+          },
+          {
+            title: 'Modular by default',
+            body: 'I broke the homepage into reusable sections (hero, services, gallery, about, testimonials, inquiry) with variants that combine into distinct pages.',
+          },
+          {
+            title: 'Built for real photography',
+            body: 'Layouts adapt to varied image sizes and styles so every page looks intentional.',
+          },
+          {
+            title: 'Responsive from the start',
+            body: 'Every section was designed for desktop and mobile together.',
+          },
+        ],
+      },
+      {
+        title: 'The System',
+        list: [
+          'Homepage templates tuned to different aesthetics',
+          'Reusable sections with flexible variants',
+          'Shared spacing, type, and image rules',
+          'Defined responsive behavior for every component',
         ],
       },
     ],
-    flowEyebrow: 'User flow',
+    closingStory: [
+      {
+        title: 'Outcome',
+        body: [
+          'The system gives the team a faster, more consistent way to build florist websites, with every site still feeling personal to the florist.',
+        ],
+      },
+      {
+        title: 'Reflection',
+        body: [
+          'Designing for both the builders and the end audience showed me that a good system has to be easy to use and still produce work that feels custom.',
+        ],
+      },
+    ],
+    flowEyebrow: 'Workflow',
     flowTitle: 'From template selection to publish.',
     flowDescription:
-      'I mapped the internal workflow around how implementation teams select, customize, preview, and publish homepage templates.',
+      'A guided flow takes the team from choosing a template to publishing a finished homepage.',
     flowImage: templateFlow,
-    flowCaption:
-      'The flow helped define where template selection, style direction, section editing, preview, and publishing fit within the existing workflow.',
+    flowCaption: 'End-to-end build flow, from dashboard to published homepage.',
     wireframeEyebrow: 'Wireframes',
     wireframeTitle: 'Defining structure before visual polish.',
     wireframeDescription:
-      'I used low-fidelity wireframes to define the homepage structure, template selection moment, and editor layout before moving into higher-fidelity design.',
+      'Layouts were set in low fidelity first, so each section worked in any combination.',
     wireframeImage: templateWireframes,
-    wireframeCaption:
-      'Early wireframes focused on hierarchy, reusable sections, and how the homepage editor could support common customization tasks.',
-    finalEyebrow: 'Recreated final direction',
-    finalTitle: 'A premium homepage template for a service-based business.',
+    wireframeCaption: 'Early wireframes exploring section order and layout variants.',
+    finalEyebrow: 'Concept homepage',
+    finalTitle: 'A premium homepage for a wedding florist.',
     finalDescription:
-      'The final mockups use fictional interior design content to show how the template system could support a polished homepage across desktop and mobile.',
+      'A concept homepage built with real wedding florist work to show what the system can produce.',
     desktopImage: templateDesktop,
     mobileImage: templateMobile,
-    desktopCaption:
-      'Desktop template showing a brand-forward hero, portfolio cards, process content, testimonials, inquiry form, and footer.',
-    mobileCaption:
-      'Mobile crop showing how portfolio content and visual hierarchy adapt to smaller screens.',
-    templateEyebrow: 'Template sections',
-    templateTitle: 'Showing the system through selected page sections.',
+    desktopCaption: 'Desktop and mobile views of the concept homepage.',
+    mobileCaption: '',
+    templateEyebrow: 'Section design',
+    templateTitle: 'Showing the system through selected sections.',
     templateDescription:
-      'The full homepage is intentionally long, so the case study highlights a few representative sections instead of showing the entire page at once.',
-    templateImage: templateFull,
-    templateCaption:
-      'Selected sections from the recreated homepage template, including gallery imagery and an inquiry form.',
+      'Each section is designed to stand on its own and work in any combination.',
+    templateImage: templateServices,
+    templateImageTwo: templateGallery,
+    templateCaption: 'Services and gallery sections from the concept homepage.',
     artifacts: [
       {
         label: '01',
         title: 'Reusable section system',
-        description:
-          'Broke the homepage into flexible sections that could support different brands without starting from scratch.',
+        description: 'A shared library of sections replaced one-off page builds.',
       },
       {
         label: '02',
         title: 'Internal workflow support',
-        description:
-          'Centered the flow around how implementation teams select, customize, preview, and publish homepage layouts.',
+        description: 'A guided flow from template selection to publish.',
       },
       {
         label: '03',
         title: 'Responsive templates',
-        description:
-          'Designed and implemented templates to adapt across desktop and mobile while preserving content hierarchy.',
+        description: 'Every layout works across desktop and mobile.',
       },
     ],
   },

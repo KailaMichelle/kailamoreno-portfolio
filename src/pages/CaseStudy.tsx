@@ -1,5 +1,5 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { caseStudies } from '../data/caseStudies'
+import { caseStudies, type CaseStudyStoryBlock } from '../data/caseStudies'
 
 function Meta({ label, value }: { label: string; value: string }) {
   return (
@@ -7,6 +7,39 @@ function Meta({ label, value }: { label: string; value: string }) {
       <span>{label}</span>
       <p>{value}</p>
     </div>
+  )
+}
+
+function Story({ blocks }: { blocks: CaseStudyStoryBlock[] }) {
+  return (
+    <section className="case-narrative">
+      {blocks.map((block) => (
+        <article key={block.title} className="case-narrative-block">
+          <h2>{block.title}</h2>
+
+          <div className="case-narrative-content">
+            {block.body?.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+
+            {block.list && (
+              <ul>
+                {block.list.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            )}
+
+            {block.items?.map((item) => (
+              <div key={item.title} className="case-narrative-item">
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </article>
+      ))}
+    </section>
   )
 }
 
@@ -61,10 +94,16 @@ export default function CaseStudy() {
       )}
 
       <section className="case-meta" aria-label="Project details">
-        <Meta label="Role" value={study.role} />
-        <Meta label="Scope" value={study.scope} />
-        <Meta label="Team" value={study.team} />
-        <Meta label="Outcome" value={study.outcome} />
+        {study.meta ? (
+          study.meta.map((item) => <Meta key={item.label} label={item.label} value={item.value} />)
+        ) : (
+          <>
+            <Meta label="Role" value={study.role} />
+            <Meta label="Scope" value={study.scope} />
+            <Meta label="Team" value={study.team} />
+            <Meta label="Outcome" value={study.outcome} />
+          </>
+        )}
       </section>
 
       {study.sections && (
@@ -82,6 +121,8 @@ export default function CaseStudy() {
           </div>
         </section>
       )}
+
+      {study.story && <Story blocks={study.story} />}
 
       {study.flowImage && (
         <section className="case-artifact-section">
@@ -171,9 +212,11 @@ export default function CaseStudy() {
               {study.mobileImage && (
                 <figure>
                   <img src={study.mobileImage} alt={`${study.title} mobile screen`} />
-                  <figcaption>
-                    {study.mobileCaption ?? 'Mobile experience'}
-                  </figcaption>
+                  {study.mobileCaption !== '' && (
+                    <figcaption>
+                      {study.mobileCaption ?? 'Mobile experience'}
+                    </figcaption>
+                  )}
                 </figure>
               )}
 
@@ -194,16 +237,21 @@ export default function CaseStudy() {
         <section className="case-artifact-section">
           <div className="case-section-heading">
             <p className="eyebrow">{study.templateEyebrow ?? 'Template example'}</p>
-            <h2>{study.templateTitle ?? 'A recreated template direction.'}</h2>
+            <h2>{study.templateTitle ?? 'A template direction.'}</h2>
             {study.templateDescription && <p>{study.templateDescription}</p>}
           </div>
 
           <figure className="case-wide-artifact">
-            <img src={study.templateImage} alt={`${study.title} recreated template`} />
+            <img src={study.templateImage} alt={`${study.title} template sections`} />
+            {study.templateImageTwo && (
+              <img src={study.templateImageTwo} alt={`${study.title} additional template section`} />
+            )}
             {study.templateCaption && <figcaption>{study.templateCaption}</figcaption>}
           </figure>
         </section>
       )}
+
+      {study.closingStory && <Story blocks={study.closingStory} />}
 
       {study.artifacts && (
         <section className="case-highlights" aria-label="Key improvements">
