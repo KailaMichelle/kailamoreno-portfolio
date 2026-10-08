@@ -188,7 +188,7 @@ export const caseStudies: CaseStudy[] = [
     subtitle: 'A reusable system for building branded, responsive florist storefronts.',
     description:
       'A library of homepage templates and reusable sections that helps internal teams build polished, responsive websites for wedding florists.',
-    status: 'Case study',
+    status: 'Design system',
     featured: true,
     accent: 'template',
     heroImage: templateHero,
