@@ -25,6 +25,16 @@
   line-height: 1.65;
 }
 
+.case-hero-details {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  color: var(--muted-light);
+  font-size: .8rem;
+  line-height: 1.5;
+}
+
 .case-link {
   margin-top: 1.6rem;
   font-size: .95rem;
@@ -100,6 +110,10 @@
 .case-story-section {
   padding-top: 3.5rem;
   box-shadow: inset 0 1px 0 var(--line);
+}
+
+.case-story-heading {
+  margin-bottom: 1.5rem;
 }
 
 .case-story-grid {
@@ -260,6 +274,99 @@
   line-height: 1.6;
 }
 
+/* Image galleries */
+
+.case-gallery-grid {
+  margin-top: 2.75rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.case-gallery-grid.columns-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.case-gallery-grid.columns-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.case-gallery-grid figure {
+  margin: 0;
+}
+
+.case-gallery-media {
+  aspect-ratio: 4 / 3;
+  padding: clamp(.75rem, 1.5vw, 1.25rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-warm);
+  border-radius: 16px;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.case-gallery-media img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.case-gallery-masonry {
+  margin-top: 2.75rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+.case-gallery-masonry-column {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 4vw, 3rem);
+}
+
+.case-gallery-masonry figure {
+  margin: 0;
+}
+
+
+.case-gallery-masonry figcaption {
+  margin-top: .85rem;
+  color: var(--muted);
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+.case-gallery-grid.plain {
+  gap: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.plain .case-gallery-media {
+  aspect-ratio: auto;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.plain .case-gallery-media img {
+  width: 100%;
+  height: auto;
+}
+
+.framed .case-gallery-media img {
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.case-gallery-grid figcaption {
+  margin-top: .85rem;
+  color: var(--muted);
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
 /* Existing and final device sections */
 
 .case-existing-grid {
@@ -405,6 +512,11 @@
     gap: 1.25rem;
   }
 
+  .case-gallery-grid,
+  .case-gallery-grid.columns-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .case-existing-grid,
   .case-device-grid {
     grid-template-columns: 1fr;
@@ -472,6 +584,22 @@
 
   .case-mobile-stack {
     grid-template-columns: 1fr;
+  }
+
+  .case-gallery-grid,
+  .case-gallery-grid.columns-2,
+  .case-gallery-grid.columns-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .case-gallery-masonry {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .case-gallery-masonry-column {
+    display: contents;
   }
 
   .case-mobile-stack img {

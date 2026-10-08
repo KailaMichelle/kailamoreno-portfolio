@@ -1,5 +1,9 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { caseStudies, type CaseStudyStoryBlock } from '../data/caseStudies'
+import {
+  caseStudies,
+  type CaseStudyGallery,
+  type CaseStudyStoryBlock,
+} from '../data/caseStudies'
 
 function Meta({ label, value }: { label: string; value: string }) {
   return (
@@ -43,6 +47,61 @@ function Story({ blocks }: { blocks: CaseStudyStoryBlock[] }) {
   )
 }
 
+function Gallery({ gallery, studyTitle }: { gallery: CaseStudyGallery; studyTitle: string }) {
+  const renderItem = (item: CaseStudyGallery['items'][number], order: number) => (
+    <figure key={item.caption} style={{ order }}>
+      <div className="case-gallery-media">
+        <img src={item.image} alt={`${studyTitle} ${item.caption}`} />
+      </div>
+      <figcaption>{item.caption}</figcaption>
+    </figure>
+  )
+
+  const modifiers = `${gallery.plain ? ' plain' : ''}${gallery.framed ? ' framed' : ''}`
+
+  if (gallery.masonry) {
+    const columns = [0, 1].map((column) =>
+      gallery.items
+        .map((item, index) => ({ item, index }))
+        .filter(({ item }) => (item.column ?? 0) === column),
+    )
+
+    return (
+      <section className="case-artifact-section">
+        <div className="case-section-heading">
+          {gallery.eyebrow && <p className="eyebrow">{gallery.eyebrow}</p>}
+          <h2>{gallery.title}</h2>
+          {gallery.description && <p>{gallery.description}</p>}
+        </div>
+
+        <div className={`case-gallery-masonry${modifiers}`}>
+          {columns.map((items, column) => (
+            <div key={column} className="case-gallery-masonry-column">
+              {items.map(({ item, index }) => renderItem(item, index))}
+            </div>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  return (
+    <section className="case-artifact-section">
+      <div className="case-section-heading">
+        {gallery.eyebrow && <p className="eyebrow">{gallery.eyebrow}</p>}
+        <h2>{gallery.title}</h2>
+        {gallery.description && <p>{gallery.description}</p>}
+      </div>
+
+      <div
+        className={`case-gallery-grid columns-${gallery.columns ?? 3}${modifiers}`}
+      >
+        {gallery.items.map((item, index) => renderItem(item, index))}
+      </div>
+    </section>
+  )
+}
+
 export default function CaseStudy() {
   const { slug } = useParams()
   const study = caseStudies.find((item) => item.slug === slug)
@@ -75,6 +134,14 @@ export default function CaseStudy() {
         <h1>{study.title}</h1>
         <p>{study.subtitle}</p>
 
+        {study.heroDetails && (
+          <div className="case-hero-details">
+            {study.heroDetails.map((detail) => (
+              <span key={detail}>{detail}</span>
+            ))}
+          </div>
+        )}
+
         {study.liveUrl && (
           <a href={study.liveUrl} target="_blank" rel="noreferrer" className="case-link">
             View live experience →
@@ -93,21 +160,29 @@ export default function CaseStudy() {
         </section>
       )}
 
-      <section className="case-meta" aria-label="Project details">
-        {study.meta ? (
-          study.meta.map((item) => <Meta key={item.label} label={item.label} value={item.value} />)
-        ) : (
-          <>
-            <Meta label="Role" value={study.role} />
-            <Meta label="Scope" value={study.scope} />
-            <Meta label="Team" value={study.team} />
-            <Meta label="Outcome" value={study.outcome} />
-          </>
-        )}
-      </section>
+      {study.meta?.length !== 0 && (
+        <section className="case-meta" aria-label="Project details">
+          {study.meta ? (
+            study.meta.map((item) => <Meta key={item.label} label={item.label} value={item.value} />)
+          ) : (
+            <>
+              <Meta label="Role" value={study.role} />
+              <Meta label="Scope" value={study.scope} />
+              <Meta label="Team" value={study.team} />
+              <Meta label="Outcome" value={study.outcome} />
+            </>
+          )}
+        </section>
+      )}
 
       {study.sections && (
         <section className="case-story-section">
+          {study.sectionsEyebrow && (
+            <div className="case-section-heading case-story-heading">
+              <p className="eyebrow">{study.sectionsEyebrow}</p>
+            </div>
+          )}
+
           <div className="case-story-grid">
             {study.sections.map((section) => (
               <article key={section.title}>
@@ -123,6 +198,10 @@ export default function CaseStudy() {
       )}
 
       {study.story && <Story blocks={study.story} />}
+
+      {study.galleries?.map((gallery) => (
+        <Gallery key={gallery.title} gallery={gallery} studyTitle={study.title} />
+      ))}
 
       {study.flowImage && (
         <section className="case-artifact-section">
@@ -256,7 +335,7 @@ export default function CaseStudy() {
       {study.artifacts && (
         <section className="case-highlights" aria-label="Key improvements">
           <div className="case-section-heading case-highlights-heading">
-            <p className="eyebrow">Key improvements</p>
+            <p className="eyebrow">{study.artifactsEyebrow ?? 'Key improvements'}</p>
             <h2>What changed</h2>
           </div>
 

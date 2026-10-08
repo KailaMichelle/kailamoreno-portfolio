@@ -6,12 +6,19 @@ import oldDesktopMap from '../assets/caseStudyMap/desktop-old-map.png'
 import oldMobileMap from '../assets/caseStudyMap/mobile-old-map.png'
 
 import templateHero from '../assets/caseStudyHomepageEditor/luna-hero.png'
-import templateFlow from '../assets/caseStudyHomepageEditor/atelier-userflow.png'
-import templateWireframes from '../assets/caseStudyHomepageEditor/atelier-wireframes.png'
-import templateDesktop from '../assets/caseStudyHomepageEditor/luna-desktop-hero.png'
-import templateMobile from '../assets/caseStudyHomepageEditor/luna-mobile-header.png'
-import templateServices from '../assets/caseStudyHomepageEditor/luna-services-section.png'
-import templateGallery from '../assets/caseStudyHomepageEditor/luna-gallery-section.png'
+import editorTemplateSelection from '../assets/caseStudyHomepageEditor/editor-template-selection.png'
+import editorAddSection from '../assets/caseStudyHomepageEditor/editor-add-section.png'
+import editorConfigureSection from '../assets/caseStudyHomepageEditor/editor-configure-section.png'
+import editorLivePreview from '../assets/caseStudyHomepageEditor/editor-live-preview.png'
+import sectionHero from '../assets/caseStudyHomepageEditor/section-hero.png'
+import sectionServices from '../assets/caseStudyHomepageEditor/section-services.png'
+import sectionGallery from '../assets/caseStudyHomepageEditor/section-gallery.png'
+import sectionTestimonials from '../assets/caseStudyHomepageEditor/section-testimonials.png'
+import sectionAbout from '../assets/caseStudyHomepageEditor/section-about.png'
+import sectionFooter from '../assets/caseStudyHomepageEditor/section-footer.png'
+import brandModernClean from '../assets/caseStudyHomepageEditor/brand-modern-clean.png'
+import brandBespoke from '../assets/caseStudyHomepageEditor/brand-bespoke.png'
+import brandRustic from '../assets/caseStudyHomepageEditor/brand-rustic.png'
 
 export type CaseStudySection = {
   kicker?: string
@@ -24,6 +31,20 @@ export type CaseStudyStoryBlock = {
   body?: string[]
   list?: string[]
   items?: { title: string; body: string }[]
+}
+
+export type CaseStudyGallery = {
+  eyebrow?: string
+  title: string
+  description?: string
+  columns?: 2 | 3 | 4
+  // Drop the card behind each image
+  plain?: boolean
+  // Hairline outline on each image (for screenshots with white edges)
+  framed?: boolean
+  // Masonry layout: items are placed in the given column, natural heights kept
+  masonry?: boolean
+  items: { image: string; caption: string; column?: number }[]
 }
 
 export type CaseStudyArtifact = {
@@ -42,6 +63,7 @@ export type CaseStudy = {
   title: string
   eyebrow?: string
   subtitle: string
+  heroDetails?: string[]
   description: string
   status: string
   featured?: boolean
@@ -95,7 +117,10 @@ export type CaseStudy = {
   templateImageTwo?: string
   templateCaption?: string
 
+  galleries?: CaseStudyGallery[]
+  artifactsEyebrow?: string
   artifacts?: CaseStudyArtifact[]
+  sectionsEyebrow?: string
   sections?: CaseStudySection[]
   story?: CaseStudyStoryBlock[]
   closingStory?: CaseStudyStoryBlock[]
@@ -104,7 +129,7 @@ export type CaseStudy = {
 export const caseStudies: CaseStudy[] = [
   {
     slug: 'business-discovery-maps',
-    eyebrow: 'Shipped work',
+    eyebrow: '01',
     title: 'Interactive Business Discovery',
     subtitle:
       'A location-first marketplace experience that makes local business discovery faster, more visual, and easier to navigate.',
@@ -158,10 +183,9 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'homepage-template-system',
-    eyebrow: 'Product Design · Design Systems',
+    eyebrow: '02',
     title: 'Homepage Template System',
-    subtitle:
-      'A library of homepage templates and reusable sections that helps internal teams build polished, responsive websites for wedding florists.',
+    subtitle: 'A reusable system for building branded, responsive florist storefronts.',
     description:
       'A library of homepage templates and reusable sections that helps internal teams build polished, responsive websites for wedding florists.',
     status: 'Case study',
@@ -170,125 +194,72 @@ export const caseStudies: CaseStudy[] = [
     heroImage: templateHero,
     thumbnailImage: templateHero,
     role: 'Product Design · Design Systems',
-    scope: 'UX flow, template structure, visual design, responsive implementation',
-    team: 'Design, product, implementation, engineering',
+    scope: 'Template system, editor flows, reusable sections, responsive design',
+    team: 'Product, design, engineering',
     outcome:
-      'Expanded homepage flexibility with a modular structure that supported more varied storefront layouts within an existing system.',
-    meta: [
-      { label: 'Role', value: 'Product Designer' },
-      { label: 'Focus', value: 'Design systems, templates' },
-      { label: 'Users', value: 'Internal web teams' },
-      { label: 'Platform', value: 'Desktop & mobile' },
-    ],
-    story: [
+      'A reusable system that lets teams build distinct florist storefronts without a custom homepage for each business',
+    galleries: [
       {
-        title: 'Overview',
-        body: [
-          'Wedding florists sell through their imagery. Their homepage is their portfolio, first impression, and inquiry funnel. I designed a template system that lets our internal teams build these sites faster without losing what makes each florist distinct.',
-        ],
-      },
-      {
-        title: 'The Challenge',
-        body: [
-          'Building each site from scratch was slow and produced inconsistent results. The team needed a faster starting point that still felt custom to each florist.',
-        ],
-      },
-      {
-        title: 'Goals',
-        list: [
-          'Speed up homepage builds',
-          'Keep quality consistent across sites',
-          'Let each florist’s style come through',
-          'Work seamlessly on mobile',
-        ],
-      },
-      {
-        title: 'Approach',
+        eyebrow: 'Website editor',
+        title: 'Designing the editor',
+        description: 'A configurable tool for building and managing homepage content.',
+        columns: 2,
+        plain: true,
+        framed: true,
         items: [
-          {
-            title: 'Designing for two audiences',
-            body: 'The system had to be easy for the team to build with and compelling for the couples browsing the site.',
-          },
-          {
-            title: 'Modular by default',
-            body: 'I broke the homepage into reusable sections (hero, services, gallery, about, testimonials, inquiry) with variants that combine into distinct pages.',
-          },
-          {
-            title: 'Built for real photography',
-            body: 'Layouts adapt to varied image sizes and styles so every page looks intentional.',
-          },
-          {
-            title: 'Responsive from the start',
-            body: 'Every section was designed for desktop and mobile together.',
-          },
+          { image: editorTemplateSelection, caption: '01 Template selection' },
+          { image: editorAddSection, caption: '02 Section selection' },
+          { image: editorConfigureSection, caption: '03 Section configuration' },
+          { image: editorLivePreview, caption: '04 Live preview' },
         ],
       },
       {
-        title: 'The System',
-        list: [
-          'Homepage templates tuned to different aesthetics',
-          'Reusable sections with flexible variants',
-          'Shared spacing, type, and image rules',
-          'Defined responsive behavior for every component',
+        eyebrow: 'The system',
+        title: 'A system of reusable sections',
+        description:
+          'Flexible, modular sections that can be combined and restyled across storefronts. Shown here as they appear on different florist sites.',
+        plain: true,
+        framed: true,
+        masonry: true,
+        items: [
+          { image: sectionHero, caption: 'Hero', column: 0 },
+          { image: sectionServices, caption: 'Services', column: 1 },
+          { image: sectionGallery, caption: 'Gallery', column: 0 },
+          { image: sectionTestimonials, caption: 'Testimonials', column: 1 },
+          { image: sectionAbout, caption: 'About', column: 1 },
+          { image: sectionFooter, caption: 'Footer', column: 0 },
+        ],
+      },
+      {
+        eyebrow: 'Storefronts',
+        title: 'One system. Different storefronts.',
+        description:
+          'The same underlying system adapts to each florist’s content and visual identity.',
+        plain: true,
+        items: [
+          { image: brandModernClean, caption: 'Modern & Minimal' },
+          { image: brandBespoke, caption: 'Elegant & Luxury' },
+          { image: brandRustic, caption: 'Warm & Organic' },
         ],
       },
     ],
-    closingStory: [
-      {
-        title: 'Outcome',
-        body: [
-          'The system gives the team a faster, more consistent way to build florist websites, with every site still feeling personal to the florist.',
-        ],
-      },
-      {
-        title: 'Reflection',
-        body: [
-          'Designing for both the builders and the end audience showed me that a good system has to be easy to use and still produce work that feels custom.',
-        ],
-      },
-    ],
-    flowEyebrow: 'Workflow',
-    flowTitle: 'From template selection to publish.',
-    flowDescription:
-      'A guided flow takes the team from choosing a template to publishing a finished homepage.',
-    flowImage: templateFlow,
-    flowCaption: 'End-to-end build flow, from dashboard to published homepage.',
-    wireframeEyebrow: 'Wireframes',
-    wireframeTitle: 'Defining structure before visual polish.',
-    wireframeDescription:
-      'Layouts were set in low fidelity first, so each section worked in any combination.',
-    wireframeImage: templateWireframes,
-    wireframeCaption: 'Early wireframes exploring section order and layout variants.',
-    finalEyebrow: 'Concept homepage',
-    finalTitle: 'A premium homepage for a wedding florist.',
-    finalDescription:
-      'A concept homepage built with real wedding florist work to show what the system can produce.',
-    desktopImage: templateDesktop,
-    mobileImage: templateMobile,
-    desktopCaption: 'Desktop and mobile views of the concept homepage.',
-    mobileCaption: '',
-    templateEyebrow: 'Section design',
-    templateTitle: 'Showing the system through selected sections.',
-    templateDescription:
-      'Each section is designed to stand on its own and work in any combination.',
-    templateImage: templateServices,
-    templateImageTwo: templateGallery,
-    templateCaption: 'Services and gallery sections from the concept homepage.',
+    artifactsEyebrow: 'Outcome',
     artifacts: [
       {
         label: '01',
-        title: 'Reusable section system',
-        description: 'A shared library of sections replaced one-off page builds.',
+        title: 'Reusable system',
+        description: 'Shared sections and layouts replaced one-off homepage designs.',
       },
       {
         label: '02',
-        title: 'Internal workflow support',
-        description: 'A guided flow from template selection to publish.',
+        title: 'Flexible customization',
+        description:
+          'Florists could adapt content and visual presentation within a consistent structure.',
       },
       {
         label: '03',
-        title: 'Responsive templates',
-        description: 'Every layout works across desktop and mobile.',
+        title: 'Scalable templates',
+        description: 'A shared foundation could support different storefronts and content needs.',
       },
     ],
   },
